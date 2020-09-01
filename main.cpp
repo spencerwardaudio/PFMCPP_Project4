@@ -8,6 +8,8 @@
  Purpose:  This project will take you through the process of writing a class that wraps a numeric type, beginning with writing simple member functions and ending with a fully templated class with lots of functionality. 
  
  1) write 3 UDTs named FloatType, DoubleType, IntType.
+
+
  
  2) give each UDT the following member functions:
         add( lhs, rhs );
@@ -49,6 +51,63 @@
 
  Wait for my code review.
  */
+
+  struct FloatType 
+  {
+       float add( lhs, rhs );
+       float subtract( lhs, rhs );
+       float multiply( lhs, rhs );
+       float divide( lhs, rhs );
+  };
+
+   struct DoubleType 
+   {
+        double add( lhs, rhs );
+        double subtract( lhs, rhs );
+        double multiply( lhs, rhs );
+        double divide( lhs, rhs );
+  };
+
+   struct IntType 
+   {
+        int add( lhs, rhs );
+        int  subtract( lhs, rhs );
+        int multiply( lhs, rhs );
+        int divide( lhs, rhs );
+  };
+
+  //====================================================
+
+  float FloatType::add( float lhs, float rhs )
+  {
+    float var = 0;
+    var = lhs + rhs;
+
+      return { var };
+  }
+
+  float FloatType::subtract( float lhs, float rhs )
+  {
+
+  }
+
+  float FloatType::multiply( float lhs, float rhs )
+  {
+
+  }
+
+  float FloatType::divide( lhs, rhs )
+{
+std::cout << "floating-point-division-by-zero" << std::endl; 
+}
+
+
+
+
+  int IntType::divide( int lhs, int rhs )
+  {
+
+  }
 
 #include <iostream>
 int main() 
