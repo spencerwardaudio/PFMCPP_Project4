@@ -52,64 +52,138 @@
  Wait for my code review.
  */
 
+#include <iostream>
+
+
   struct FloatType 
   {
-       float add( lhs, rhs );
-       float subtract( lhs, rhs );
-       float multiply( lhs, rhs );
-       float divide( lhs, rhs );
+       float add(float lhs, float rhs );
+       float subtract(float lhs,float rhs );
+       float multiply(float lhs,float rhs );
+       float divide(float lhs, float rhs );
   };
 
    struct DoubleType 
    {
-        double add( lhs, rhs );
-        double subtract( lhs, rhs );
-        double multiply( lhs, rhs );
-        double divide( lhs, rhs );
+        double add(double lhs, double rhs );
+        double subtract(double lhs,double rhs );
+        double multiply(double lhs,double rhs );
+        double divide(double lhs, double rhs );
   };
 
    struct IntType 
    {
-        int add( lhs, rhs );
-        int  subtract( lhs, rhs );
-        int multiply( lhs, rhs );
-        int divide( lhs, rhs );
+        int add(int lhs,int rhs );
+        int  subtract(int lhs,int rhs );
+        int multiply(int lhs,int rhs );
+        int divide(int lhs,int rhs );
   };
-
-  //====================================================
 
   float FloatType::add( float lhs, float rhs )
   {
-    float var = 0;
-    var = lhs + rhs;
+      
+     float var = lhs + rhs;
 
-      return { var };
+      return  var ;
   }
 
   float FloatType::subtract( float lhs, float rhs )
   {
+    float var = lhs - rhs;
 
+      return var ;
   }
 
   float FloatType::multiply( float lhs, float rhs )
   {
+    float var = lhs * rhs;
 
+      return var ;
   }
 
-  float FloatType::divide( lhs, rhs )
+  float FloatType::divide(float lhs, float rhs )
 {
-std::cout << "floating-point-division-by-zero" << std::endl; 
+
+    float var = lhs / rhs;
+
+    if (rhs == 0.f)
+    { 
+        std::cout << "warning, floating point division by zero returns 'inf' !" << std::endl; 
+    }
+
+    return var;
+}
+
+  double DoubleType::add( double lhs, double rhs )
+  {
+    double var = lhs + rhs;
+
+      return var;
+  }
+
+  double DoubleType::subtract( double lhs, double rhs )
+  {
+    double var = lhs - rhs;
+
+      return var;
+  }
+
+  double DoubleType::multiply( double lhs, double rhs )
+  {
+    double var = lhs * rhs;
+
+      return var;
+  }
+
+  double DoubleType::divide( double lhs, double rhs )
+{
+    double var = lhs / rhs;
+
+    return var;
+}
+
+    int IntType::add( int lhs, int rhs )
+  {
+    int var = lhs + rhs;
+
+      return var;
+  }
+
+  int IntType::subtract( int lhs, int rhs )
+  {
+    int var = lhs - rhs;
+
+      return var;
+  }
+
+  int IntType::multiply( int lhs, int rhs )
+  {
+    int var = lhs * rhs;
+
+      return var;
+  }
+
+  int IntType::divide( int lhs, int rhs )
+{
+
+    if (rhs == 0)
+    {
+        std::cout << "error, integer division by zero will crash the program!" << std::endl;
+
+        std::cout << "returning lhs" << std::endl;
+
+        return lhs; 
+    } 
+    else 
+    {
+        int var = lhs / rhs; 
+
+        return var;
+    }
 }
 
 
 
-
-  int IntType::divide( int lhs, int rhs )
-  {
-
-  }
-
-#include <iostream>
 int main() 
 {
     FloatType ft;
