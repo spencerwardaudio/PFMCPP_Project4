@@ -81,86 +81,69 @@
 
   float FloatType::add( float lhs, float rhs )
   {
-      
-     float var = lhs + rhs;
-
-      return  var ;
+      return  lhs + rhs;
   }
 
   float FloatType::subtract( float lhs, float rhs )
   {
-    float var = lhs - rhs;
-
-      return var ;
+      return lhs - rhs;
   }
 
   float FloatType::multiply( float lhs, float rhs )
   {
-    float var = lhs * rhs;
-
-      return var ;
+      return lhs * rhs;
   }
 
   float FloatType::divide(float lhs, float rhs )
 {
-
-    float var = lhs / rhs;
-
     if (rhs == 0.f)
     { 
+        std::cout << " " << std::endl;
         std::cout << "warning, floating point division by zero returns 'inf' !" << std::endl; 
     }
 
-    return var;
+    return lhs / rhs;
 }
 
   double DoubleType::add( double lhs, double rhs )
   {
-    double var = lhs + rhs;
-
-      return var;
+      return lhs + rhs;
   }
 
   double DoubleType::subtract( double lhs, double rhs )
   {
-    double var = lhs - rhs;
-
-      return var;
+      return lhs - rhs;
   }
 
   double DoubleType::multiply( double lhs, double rhs )
   {
-    double var = lhs * rhs;
-
-      return var;
+      return lhs * rhs;
   }
 
   double DoubleType::divide( double lhs, double rhs )
 {
-    double var = lhs / rhs;
+    if (rhs == 0.0)
+    { 
+        std::cout << " " << std::endl;
+        std::cout << "warning, floating point division by zero returns 'inf' !" << std::endl; 
+    } 
 
-    return var;
+    return lhs / rhs;
 }
 
     int IntType::add( int lhs, int rhs )
   {
-    int var = lhs + rhs;
-
-      return var;
+      return lhs + rhs;
   }
 
   int IntType::subtract( int lhs, int rhs )
   {
-    int var = lhs - rhs;
-
-      return var;
+      return lhs - rhs;
   }
 
   int IntType::multiply( int lhs, int rhs )
   {
-    int var = lhs * rhs;
-
-      return var;
+      return lhs * rhs;
   }
 
   int IntType::divide( int lhs, int rhs )
@@ -174,12 +157,8 @@
 
         return lhs; 
     } 
-    else 
-    {
-        int var = lhs / rhs; 
 
-        return var;
-    }
+    return lhs / rhs;
 }
 
 
