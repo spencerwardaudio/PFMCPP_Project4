@@ -18,14 +18,19 @@ struct A {};
 
 struct HeapA
 {
-    A* a1 = new A();
-    delete a1;
+    A* a1; 
+    
+    HeapA() : a1 ( new A() )
+    {
+
+    }
+    ~HeapA()
+    {
+        delete a1;  
+        a1 = nullptr;
+    }
+
 };
-
-
-
-
-
 
 
  /*
@@ -99,10 +104,6 @@ inf
 ---------------------
 
 good to go!
-
-
-
-
 
 */
 
@@ -184,6 +185,15 @@ int main()
 
 struct FloatType 
 {
+    float* value;
+
+    FloatType(float fTValue) : value( new float (fTValue){}
+    ~FloatType()
+    {
+        delete value;
+        value = nullptr;
+    }
+
     float add(float lhs, float rhs);
     float subtract(float lhs,float rhs);
     float multiply(float lhs,float rhs);
@@ -192,6 +202,15 @@ struct FloatType
 
 struct DoubleType 
 {
+    double* value;
+
+    DoubleType(double dTValue) : value( new double (dTValue){}
+    ~DoubleType()
+    {
+        delete value;
+        value = nullptr;
+    }
+
     double add(double lhs, double rhs);
     double subtract(double lhs,double rhs);
     double multiply(double lhs,double rhs);
@@ -200,6 +219,16 @@ struct DoubleType
 
 struct IntType 
 {
+
+    int* value;
+
+    IntType(int iTValue) : value( new int (iTValue){}
+    ~IntType()
+    {
+        delete value;
+        value = nullptr;
+    }
+
     int add(int lhs,int rhs);
     int subtract(int lhs,int rhs);
     int multiply(int lhs,int rhs);
