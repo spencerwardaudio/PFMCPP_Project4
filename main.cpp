@@ -144,20 +144,20 @@ struct FloatType
     FloatType& multiply(float rhs);
     FloatType& divide(float rhs);
 
-    FloatType& add(FloatType& fType);
-    FloatType& subtract(FloatType& fType);
-    FloatType& multiply(FloatType& fType);
-    FloatType& divide(FloatType& fType);
+    FloatType& add(FloatType& ft);
+    FloatType& subtract(FloatType& ft);
+    FloatType& multiply(FloatType& ft);
+    FloatType& divide(FloatType& ft);
 
-    FloatType& add(DoubleType& dType);
-    FloatType& subtract(DoubleType& dType);
-    FloatType& multiply(DoubleType& dType);
-    FloatType& divide(DoubleType& dType);
+    FloatType& add(DoubleType& db);
+    FloatType& subtract(DoubleType& db);
+    FloatType& multiply(DoubleType& db);
+    FloatType& divide(DoubleType& db);
 
-    FloatType& add(IntType& iType);
-    FloatType& subtract(IntType& iType);
-    FloatType& multiply(IntType& iType);
-    FloatType& divide(IntType& iType);
+    FloatType& add(IntType& i);
+    FloatType& subtract(IntType& i);
+    FloatType& multiply(IntType& i);
+    FloatType& divide(IntType& i);
 };
 
 //------------------------------------------------
@@ -166,7 +166,7 @@ struct DoubleType
 {
     double* value;
 
-    DoubleType(double dTValue) : value( new double (dTValue) ){}
+    DoubleType(double dtValue) : value( new double (dtValue) ){}
     ~DoubleType()
     {
         delete value;
@@ -178,20 +178,20 @@ struct DoubleType
     DoubleType& multiply(double rhs);
     DoubleType& divide(double rhs);
 
-    DoubleType& add(FloatType& fType);
-    DoubleType& subtract(FloatType& fType);
-    DoubleType& multiply(FloatType& fType);
-    DoubleType& divide(FloatType& fType);
+    DoubleType& add(FloatType& ft);
+    DoubleType& subtract(FloatType& ft);
+    DoubleType& multiply(FloatType& ft);
+    DoubleType& divide(FloatType& ft);
 
-    DoubleType& add(DoubleType& dType);
-    DoubleType& subtract(DoubleType& dType);
-    DoubleType& multiply(DoubleType& dType);
-    DoubleType& divide(DoubleType& dType);
+    DoubleType& add(DoubleType& db);
+    DoubleType& subtract(DoubleType& db);
+    DoubleType& multiply(DoubleType& db);
+    DoubleType& divide(DoubleType& db);
 
-    DoubleType& add(IntType& iType);
-    DoubleType& subtract(IntType& iType);
-    DoubleType& multiply(IntType& iType);
-    DoubleType& divide(IntType& iType);
+    DoubleType& add(IntType& i);
+    DoubleType& subtract(IntType& i);
+    DoubleType& multiply(IntType& i);
+    DoubleType& divide(IntType& i);
 };
 
 //------------------------------------------------
@@ -201,32 +201,32 @@ struct IntType
 
     int* value;
 
-    IntType(int iTValue) : value( new int (iTValue) ){}
+    IntType(int itValue) : value( new int (itValue) ){}
     ~IntType()
     {
         delete value;
         value = nullptr;
     }
 
-    int add(int lhs,int rhs);
-    int subtract(int lhs,int rhs);
-    int multiply(int lhs,int rhs);
-    int divide(int lhs,int rhs);
+    IntType& add(int rhs);
+    IntType& subtract(int rhs);
+    IntType& multiply(int rhs);
+    IntType& divide(int rhs);
 
-    IntType& add(FloatType& fType);
-    IntType& subtract(FloatType& fType);
-    IntType& multiply(FloatType& fType);
-    IntType& divide(FloatType& fType);
+    IntType& add(FloatType& ft);
+    IntType& subtract(FloatType& ft);
+    IntType& multiply(FloatType& ft);
+    IntType& divide(FloatType& ft);
 
-    IntType& add(DoubleType& dType);
-    IntType& subtract(DoubleType& dType);
-    IntType& multiply(DoubleType& dType);
-    IntType& divide(DoubleType& dType);
+    IntType& add(DoubleType& db);
+    IntType& subtract(DoubleType& db);
+    IntType& multiply(DoubleType& db);
+    IntType& divide(DoubleType& db);
 
-    IntType& add(IntType& iType);
-    IntType& subtract(IntType& iType);
-    IntType& multiply(IntType& iType);
-    IntType& divide(IntType& iType);
+    IntType& add(IntType& i);
+    IntType& subtract(IntType& i);
+    IntType& multiply(IntType& i);
+    IntType& divide(IntType& i);
 };
 
 //------------------------------------------------
@@ -263,59 +263,59 @@ FloatType& FloatType::divide(float rhs)
 
 //------------------------------------------------
 
-FloatType& add(FloatType& fType)
+FloatType& FloatType::add(FloatType& ft)
 {
-    return add(*fType.value);
+    return add(*ft.value);
 }
-FloatType& subtract(FloatType& fType)
+FloatType& FloatType::subtract(FloatType& ft)
 {
-    return subtract(*fType.value);
+    return subtract(*ft.value);
 }
-FloatType& multiply(FloatType& fType)
+FloatType& FloatType::multiply(FloatType& ft)
 {
-    return multiply(*fType.value);
+    return multiply(*ft.value);
 }
-FloatType& divide(FloatType& fType)
+FloatType& FloatType::divide(FloatType& ft)
 {
-    return divide(*fType.value);
-}
-
-//------------------------------------------------
-
-FloatType& add(DoubleType& dType)
-{
-    return add(*dType.value);
-}
-FloatType& subtract(DoubleType& dType)
-{
-    return subtract(*dType.value);
-}
-FloatType& multiply(DoubleType& dType)
-{
-    return multiply(*dType.value);
-}
-FloatType& divide(DoubleType& dType)
-{
-    return divide(*dType.value);
+    return divide(*ft.value);
 }
 
 //------------------------------------------------
 
-FloatType& add(IntType& iType)
+FloatType& FloatType::add(DoubleType& db)
 {
-    return add(*iType.value);
+    return add(*db.value);
 }
-FloatType& subtract(IntType& iType)
+FloatType& FloatType::subtract(DoubleType& db)
 {
-    return subtract(*iType.value);
+    return subtract(*db.value);
 }
-FloatType& multiply(IntType& iType)
+FloatType& FloatType::multiply(DoubleType& db)
 {
-    return multiply(*iType.value);
+    return multiply(*db.value);
 }
-FloatType& divide(IntType& iType)
+FloatType& FloatType::divide(DoubleType& db)
 {
-    return divide(*iType.value);
+    return divide(*db.value);
+}
+
+//------------------------------------------------
+
+FloatType& FloatType::add(IntType& i)
+{
+    return add(*i.value);
+}
+FloatType& FloatType::subtract(IntType& i)
+{
+    return subtract(*i.value);
+}
+FloatType& FloatType::multiply(IntType& i)
+{
+    return multiply(*i.value);
+}
+FloatType& FloatType::divide(IntType& i)
+{
+    return divide(*i.value);
 }
 
 //------------------------------------------------
@@ -353,59 +353,59 @@ DoubleType& DoubleType::divide(double rhs)
 
 //------------------------------------------------
 
-DoubleType& add(FloatType& fType)
+DoubleType& DoubleType::add(FloatType& ft)
 {
-    return add(*fType.value);
+    return add(*ft.value);
 }
-DoubleType& subtract(FloatType& fType)
+DoubleType& DoubleType::subtract(FloatType& ft)
 {
-    return subtract(*fType.value);
+    return subtract(*ft.value);
 }
-DoubleType& multiply(FloatType& fType)
+DoubleType& DoubleType::multiply(FloatType& ft)
 {
-    return multiply(*fType.value);
+    return multiply(*ft.value);
 }
-DoubleType& divide(FloatType& fType)
+DoubleType& DoubleType::divide(FloatType& ft)
 {
-    return divide(*fType.value);
-}
-
-//------------------------------------------------
-
-DoubleType& add(DoubleType& dType)
-{
-    return add(*dType.value);
-}
-DoubleType& subtract(DoubleType& dType)
-{
-    return subtract(*dType.value);
-}
-DoubleType& multiply(DoubleType& dType)
-{
-    return multiply(*dType.value);
-}
-DoubleType& divide(DoubleType& dType)
-{
-    return divide(*dType.value);
+    return divide(*ft.value);
 }
 
 //------------------------------------------------
 
-DoubleType& add(IntType& iType)
+DoubleType& DoubleType::add(DoubleType& db)
 {
-    return add(*iType.value);
+    return add(*db.value);
 }
-DoubleType& subtract(IntType& iType)
+DoubleType& DoubleType::subtract(DoubleType& db)
 {
-    return subtract(*iType.value);
+    return subtract(*db.value);
 }
-DoubleType& multiply(IntType& dType)
+DoubleType& DoubleType::multiply(DoubleType& db)
 {
-    return multiply(*iType.value);
+    return multiply(*db.value);
 }
-DoubleType& divide(IntType& iType)
+DoubleType& DoubleType::divide(DoubleType& db)
 {
-    return divide(*iType.value);
+    return divide(*db.value);
+}
+
+//------------------------------------------------
+
+DoubleType& DoubleType::add(IntType& i)
+{
+    return add(*i.value);
+}
+DoubleType& DoubleType::subtract(IntType& i)
+{
+    return subtract(*i.value);
+}
+DoubleType& DoubleType::multiply(IntType& i)
+{
+    return multiply(*i.value);
+}
+DoubleType& DoubleType::divide(IntType& i)
+{
+    return divide(*i.value);
 }
 
 //------------------------------------------------
@@ -433,67 +433,66 @@ IntType& IntType::divide(int rhs)
     if (rhs == 0)
     {
         std::cout << "error, integer division by zero will crash the program!" << std::endl;
-        std::cout << "returning lhs" << std::endl;
-        return lhs; 
+        std::cout << "returning rhs" << std::endl;
     } 
 
     *value /= rhs;
     return  *this;
 }
 
-IntType& add(FloatType& fType)
+IntType& IntType::add(FloatType& ft)
 {
-    return add(*fType.value);
+    return add(*ft.value);
 }
-IntType& subtract(FloatType& fType)
+IntType& IntType::subtract(FloatType& ft)
 {
-    return subtract(*fType.value);
+    return subtract(*ft.value);
 }
-IntType& multiply(FloatType& fType)
+IntType& IntType::multiply(FloatType& ft)
 {
-    return multiply(*fType.value);
+    return multiply(*ft.value);
 }
-IntType& divide(FloatType& fType)
+IntType& IntType::divide(FloatType& ft)
 {
-    return divide(*fType.value);
-}
-
-//------------------------------------------------
-
-IntType& add(DoubleType& dType)
-{
-    return add(*dType.value);
-}
-IntType& subtract(DoubleType& dType)
-{
-    return subtract(*dType.value);
-}
-IntType& multiply(DoubleType& dType)
-{
-    return multiply(*dType.value);
-}
-IntType& divide(DoubleType& dType)
-{
-    return divide(*dType.value);
+    return divide(*ft.value);
 }
 
 //------------------------------------------------
 
-IntType& add(IntType& iType)
+IntType& IntType::add(DoubleType& db)
 {
-    return add(*iType.value);
+    return add(*db.value);
 }
-IntType& subtract(IntType& iType)
+IntType& IntType::subtract(DoubleType& db)
 {
-    return subtract(*iType.value);
+    return subtract(*db.value);
 }
-IntType& multiply(IntType& dType)
+IntType& IntType::multiply(DoubleType& db)
 {
-    return multiply(*iType.value);
+    return multiply(*db.value);
 }
-IntType& divide(IntType& iType)
+IntType& IntType::divide(DoubleType& db)
 {
-    return divide(*iType.value);
+    return divide(*db.value);
+}
+
+//------------------------------------------------
+
+IntType& IntType::add(IntType& i)
+{
+    return add(*i.value);
+}
+IntType& IntType::subtract(IntType& i)
+{
+    return subtract(*i.value);
+}
+IntType& IntType::multiply(IntType& i)
+{
+    return multiply(*i.value);
+}
+IntType& IntType::divide(IntType& i)
+{
+    return divide(*i.value);
 }
 
 
