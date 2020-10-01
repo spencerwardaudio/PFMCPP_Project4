@@ -215,6 +215,8 @@ struct FloatType
     FloatType& divide(IntType& iType);
 };
 
+//------------------------------------------------
+
 struct DoubleType 
 {
     double* value;
@@ -246,6 +248,8 @@ struct DoubleType
     DoubleType& multiply(IntType& iType);
     DoubleType& divide(IntType& iType);
 };
+
+//------------------------------------------------
 
 struct IntType 
 {
@@ -280,6 +284,8 @@ struct IntType
     IntType& divide(IntType& iType);
 };
 
+//------------------------------------------------
+
 FloatType& FloatType::add(float rhs)
 {
     *value += rhs;
@@ -310,50 +316,174 @@ FloatType& FloatType::divide(float rhs)
     return  *this;
 }
 
+//------------------------------------------------
 
-
-
-double DoubleType::add(double lhs, double rhs)
+FloatType& add(FloatType& fType)
 {
-    return lhs + rhs;
+    return add(*fType.value);
+}
+FloatType& subtract(FloatType& fType)
+{
+    return subtract(*fType.value);
+}
+FloatType& multiply(FloatType& fType)
+{
+    return multiply(*fType.value);
+}
+FloatType& divide(FloatType& fType)
+{
+    return divide(*fType.value);
 }
 
-double DoubleType::subtract(double lhs, double rhs)
+//------------------------------------------------
+
+FloatType& add(DoubleType& dType)
 {
-    return lhs - rhs;
+    return add(*dType.value);
+}
+FloatType& subtract(DoubleType& dType)
+{
+    return subtract(*dType.value);
+}
+FloatType& multiply(DoubleType& dType)
+{
+    return multiply(*dType.value);
+}
+FloatType& divide(DoubleType& dType)
+{
+    return divide(*dType.value);
 }
 
-double DoubleType::multiply(double lhs, double rhs)
+//------------------------------------------------
+
+FloatType& add(IntType& iType)
 {
-    return lhs * rhs;
+    return add(*iType.value);
+}
+FloatType& subtract(IntType& iType)
+{
+    return subtract(*iType.value);
+}
+FloatType& multiply(IntType& iType)
+{
+    return multiply(*iType.value);
+}
+FloatType& divide(IntType& iType)
+{
+    return divide(*iType.value);
 }
 
-double DoubleType::divide(double lhs, double rhs)
+//------------------------------------------------
+
+
+DoubleType& DoubleType::add(double rhs)
+{
+    *value += rhs;
+    return  *this;
+}
+
+DoubleType& DoubleType::subtract(double rhs)
+{
+    *value -= rhs;
+    return  *this;
+}
+
+DoubleType& DoubleType::multiply(double rhs)
+{
+    *value *= rhs;
+    return  *this;
+}
+
+DoubleType& DoubleType::divide(double rhs)
 {
     if (rhs == 0.0)
     { 
         std::cout << " " << std::endl;
         std::cout << "warning, floating point division by zero returns 'inf' !" << std::endl; 
     } 
-    return lhs / rhs;
+    
+    *value /= rhs;
+    return  *this;
 }
 
-int IntType::add(int lhs, int rhs)
+//------------------------------------------------
+
+DoubleType& add(FloatType& fType)
 {
-    return lhs + rhs;
+    return add(*fType.value);
 }
-
-int IntType::subtract(int lhs, int rhs)
+DoubleType& subtract(FloatType& fType)
 {
-    return lhs - rhs;
+    return subtract(*fType.value);
 }
-
-int IntType::multiply(int lhs, int rhs)
+DoubleType& multiply(FloatType& fType)
 {
-    return lhs * rhs;
+    return multiply(*fType.value);
+}
+DoubleType& divide(FloatType& fType)
+{
+    return divide(*fType.value);
 }
 
-int IntType::divide(int lhs, int rhs)
+//------------------------------------------------
+
+DoubleType& add(DoubleType& dType)
+{
+    return add(*dType.value);
+}
+DoubleType& subtract(DoubleType& dType)
+{
+    return subtract(*dType.value);
+}
+DoubleType& multiply(DoubleType& dType)
+{
+    return multiply(*dType.value);
+}
+DoubleType& divide(DoubleType& dType)
+{
+    return divide(*dType.value);
+}
+
+//------------------------------------------------
+
+DoubleType& add(IntType& iType)
+{
+    return add(*iType.value);
+}
+DoubleType& subtract(IntType& iType)
+{
+    return subtract(*iType.value);
+}
+DoubleType& multiply(IntType& dType)
+{
+    return multiply(*iType.value);
+}
+DoubleType& divide(IntType& iType)
+{
+    return divide(*iType.value);
+}
+
+//------------------------------------------------
+
+IntType& IntType::add(int rhs)
+{
+    *value += rhs;
+    return  *this;
+}
+
+IntType& IntType::subtract(int rhs)
+{
+    *value -= rhs;
+    return  *this;
+}
+
+IntType& IntType::multiply(int rhs)
+{
+    *value *= rhs;
+    return  *this;
+}
+
+IntType& IntType::divide(int rhs)
 {
     if (rhs == 0)
     {
@@ -361,8 +491,67 @@ int IntType::divide(int lhs, int rhs)
         std::cout << "returning lhs" << std::endl;
         return lhs; 
     } 
-    return lhs / rhs;
+
+    *value /= rhs;
+    return  *this;
 }
+
+IntType& add(FloatType& fType)
+{
+    return add(*fType.value);
+}
+IntType& subtract(FloatType& fType)
+{
+    return subtract(*fType.value);
+}
+IntType& multiply(FloatType& fType)
+{
+    return multiply(*fType.value);
+}
+IntType& divide(FloatType& fType)
+{
+    return divide(*fType.value);
+}
+
+//------------------------------------------------
+
+IntType& add(DoubleType& dType)
+{
+    return add(*dType.value);
+}
+IntType& subtract(DoubleType& dType)
+{
+    return subtract(*dType.value);
+}
+IntType& multiply(DoubleType& dType)
+{
+    return multiply(*dType.value);
+}
+IntType& divide(DoubleType& dType)
+{
+    return divide(*dType.value);
+}
+
+//------------------------------------------------
+
+IntType& add(IntType& iType)
+{
+    return add(*iType.value);
+}
+IntType& subtract(IntType& iType)
+{
+    return subtract(*iType.value);
+}
+IntType& multiply(IntType& dType)
+{
+    return multiply(*iType.value);
+}
+IntType& divide(IntType& iType)
+{
+    return divide(*iType.value);
+}
+
+
 
 int main() 
 {
