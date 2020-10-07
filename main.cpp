@@ -163,20 +163,20 @@ struct FloatType
     FloatType& multiply(float rhs);
     FloatType& divide(float rhs);
 
-    FloatType& add(FloatType& ft);
-    FloatType& subtract(FloatType& ft);
-    FloatType& multiply(FloatType& ft);
-    FloatType& divide(FloatType& ft);
+    // FloatType& add(FloatType& ft);
+    // FloatType& subtract(FloatType& ft);
+    // FloatType& multiply(FloatType& ft);
+    // FloatType& divide(FloatType& ft);
 
-    FloatType& add(DoubleType& db);
-    FloatType& subtract(DoubleType& db);
-    FloatType& multiply(DoubleType& db);
-    FloatType& divide(DoubleType& db);
+    // FloatType& add(DoubleType& db);
+    // FloatType& subtract(DoubleType& db);
+    // FloatType& multiply(DoubleType& db);
+    // FloatType& divide(DoubleType& db);
 
-    FloatType& add(IntType& i);
-    FloatType& subtract(IntType& i);
-    FloatType& multiply(IntType& i);
-    FloatType& divide(IntType& i);
+    // FloatType& add(IntType& i);
+    // FloatType& subtract(IntType& i);
+    // FloatType& multiply(IntType& i);
+    // FloatType& divide(IntType& i);
 };
 
 //------------------------------------------------
