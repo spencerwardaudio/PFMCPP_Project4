@@ -35,23 +35,22 @@
  10) click the [run] button.  Clear up any errors or warnings as best you can.
 
  */
+// void part3()
+// {
+//     FloatType ft( 5.5f );
+//     DoubleType dt( 11.1 );
+//     IntType it ( 34 );
+//     DoubleType pi( 3.14 );
 
-void part3()
-{
-    FloatType ft( 5.5f );
-    DoubleType dt( 11.1 );
-    IntType it ( 34 );
-    DoubleType pi( 3.14 );
-
-    std::cout << "The result of FloatType^3 divided by IntType is: " << ft.multiply( ft ).multiply( ft ).divide( it ) << std::endl;
-    std::cout << "The result of DoubleType times 3 plus IntType is : " << dt.multiply( 3 ).add( it ) << std::endl;
-    std::cout << "The result of IntType divided by 3.14 multiplied by DoubleType minus FloatType is: " << it.divide( pi ).multiply( dt ).subtract( ft ) << std::endl;
-    std::cout << "An operation followed by attempts to divide by 0, which are ignored and warns user: " << std::endl;
-    std::cout << it.multiply(it).divide(0).divide(0.0f).divide(0.0) << std::endl;
+//     std::cout << "The result of FloatType^3 divided by IntType is: " << ft.multiply( ft ).multiply( ft ).divide( it ) << std::endl;
+//     std::cout << "The result of DoubleType times 3 plus IntType is : " << dt.multiply( 3 ).add( it ) << std::endl;
+//     std::cout << "The result of IntType divided by 3.14 multiplied by DoubleType minus FloatType is: " << it.divide( pi ).multiply( dt ).subtract( ft ) << std::endl;
+//     std::cout << "An operation followed by attempts to divide by 0, which are ignored and warns user: " << std::endl;
+//     std::cout << it.multiply(it).divide(0).divide(0.0f).divide(0.0) << std::endl;
     
-    std::cout << "FloatType x IntType  =  " << it.multiply( ft ) << std::endl;
-    std::cout << "(IntType + DoubleType + FloatType) x 24 = " << it.add( dt ).add( ft ).multiply( 24 ) << std::endl;
-}
+//     std::cout << "FloatType x IntType  =  " << it.multiply( ft ) << std::endl;
+//     std::cout << "(IntType + DoubleType + FloatType) x 24 = " << it.add( dt ).add( ft ).multiply( 24 ) << std::endl;
+// }
 
 /*
 your program should generate the following output EXACTLY.
@@ -163,20 +162,10 @@ struct FloatType
     FloatType& multiply(float rhs);
     FloatType& divide(float rhs);
 
-    // FloatType& add(FloatType& ft);
-    // FloatType& subtract(FloatType& ft);
-    // FloatType& multiply(FloatType& ft);
-    // FloatType& divide(FloatType& ft);
+    private:
 
-    // FloatType& add(DoubleType& db);
-    // FloatType& subtract(DoubleType& db);
-    // FloatType& multiply(DoubleType& db);
-    // FloatType& divide(DoubleType& db);
 
-    // FloatType& add(IntType& i);
-    // FloatType& subtract(IntType& i);
-    // FloatType& multiply(IntType& i);
-    // FloatType& divide(IntType& i);
+
 };
 
 //------------------------------------------------
@@ -197,20 +186,6 @@ struct DoubleType
     DoubleType& multiply(double rhs);
     DoubleType& divide(double rhs);
 
-    DoubleType& add(FloatType& ft);
-    DoubleType& subtract(FloatType& ft);
-    DoubleType& multiply(FloatType& ft);
-    DoubleType& divide(FloatType& ft);
-
-    DoubleType& add(DoubleType& db);
-    DoubleType& subtract(DoubleType& db);
-    DoubleType& multiply(DoubleType& db);
-    DoubleType& divide(DoubleType& db);
-
-    DoubleType& add(IntType& i);
-    DoubleType& subtract(IntType& i);
-    DoubleType& multiply(IntType& i);
-    DoubleType& divide(IntType& i);
 };
 
 //------------------------------------------------
@@ -232,20 +207,6 @@ struct IntType
     IntType& multiply(int rhs);
     IntType& divide(int rhs);
 
-    IntType& add(FloatType& ft);
-    IntType& subtract(FloatType& ft);
-    IntType& multiply(FloatType& ft);
-    IntType& divide(FloatType& ft);
-
-    IntType& add(DoubleType& db);
-    IntType& subtract(DoubleType& db);
-    IntType& multiply(DoubleType& db);
-    IntType& divide(DoubleType& db);
-
-    IntType& add(IntType& i);
-    IntType& subtract(IntType& i);
-    IntType& multiply(IntType& i);
-    IntType& divide(IntType& i);
 };
 
 //------------------------------------------------
@@ -282,64 +243,6 @@ FloatType& FloatType::divide(float rhs)
 
 //------------------------------------------------
 
-FloatType& FloatType::add(FloatType& ft)
-{
-    return add(*ft.value);
-}
-FloatType& FloatType::subtract(FloatType& ft)
-{
-    return subtract(*ft.value);
-}
-FloatType& FloatType::multiply(FloatType& ft)
-{
-    return multiply(*ft.value);
-}
-FloatType& FloatType::divide(FloatType& ft)
-{
-    return divide(*ft.value);
-}
-
-//------------------------------------------------
-
-FloatType& FloatType::add(DoubleType& db)
-{
-    return add(*db.value);
-}
-FloatType& FloatType::subtract(DoubleType& db)
-{
-    return subtract(*db.value);
-}
-FloatType& FloatType::multiply(DoubleType& db)
-{
-    return multiply(*db.value);
-}
-FloatType& FloatType::divide(DoubleType& db)
-{
-    return divide(*db.value);
-}
-
-//------------------------------------------------
-
-FloatType& FloatType::add(IntType& i)
-{
-    return add(*i.value);
-}
-FloatType& FloatType::subtract(IntType& i)
-{
-    return subtract(*i.value);
-}
-FloatType& FloatType::multiply(IntType& i)
-{
-    return multiply(*i.value);
-}
-FloatType& FloatType::divide(IntType& i)
-{
-    return divide(*i.value);
-}
-
-//------------------------------------------------
-
-
 DoubleType& DoubleType::add(double rhs)
 {
     *value += rhs;
@@ -367,63 +270,6 @@ DoubleType& DoubleType::divide(double rhs)
 
     *value /= rhs;
     return  *this;
-}
-
-//------------------------------------------------
-
-DoubleType& DoubleType::add(FloatType& ft)
-{
-    return add(*ft.value);
-}
-DoubleType& DoubleType::subtract(FloatType& ft)
-{
-    return subtract(*ft.value);
-}
-DoubleType& DoubleType::multiply(FloatType& ft)
-{
-    return multiply(*ft.value);
-}
-DoubleType& DoubleType::divide(FloatType& ft)
-{
-    return divide(*ft.value);
-}
-
-//------------------------------------------------
-
-DoubleType& DoubleType::add(DoubleType& db)
-{
-    return add(*db.value);
-}
-DoubleType& DoubleType::subtract(DoubleType& db)
-{
-    return subtract(*db.value);
-}
-DoubleType& DoubleType::multiply(DoubleType& db)
-{
-    return multiply(*db.value);
-}
-DoubleType& DoubleType::divide(DoubleType& db)
-{
-    return divide(*db.value);
-}
-
-//------------------------------------------------
-
-DoubleType& DoubleType::add(IntType& i)
-{
-    return add(*i.value);
-}
-DoubleType& DoubleType::subtract(IntType& i)
-{
-    return subtract(*i.value);
-}
-DoubleType& DoubleType::multiply(IntType& i)
-{
-    return multiply(*i.value);
-}
-DoubleType& DoubleType::divide(IntType& i)
-{
-    return divide(*i.value);
 }
 
 //------------------------------------------------
@@ -461,62 +307,6 @@ IntType& IntType::divide(int rhs)
     return *this;
 }
 
-IntType& IntType::add(FloatType& ft)
-{
-    return add(*ft.value);
-}
-IntType& IntType::subtract(FloatType& ft)
-{
-    return subtract(*ft.value);
-}
-IntType& IntType::multiply(FloatType& ft)
-{
-    return multiply(*ft.value);
-}
-IntType& IntType::divide(FloatType& ft)
-{
-    return divide(*ft.value);
-}
-
-//------------------------------------------------
-
-IntType& IntType::add(DoubleType& db)
-{
-    return add(*db.value);
-}
-IntType& IntType::subtract(DoubleType& db)
-{
-    return subtract(*db.value);
-}
-IntType& IntType::multiply(DoubleType& db)
-{
-    return multiply(*db.value);
-}
-IntType& IntType::divide(DoubleType& db)
-{
-    return divide(*db.value);
-}
-
-//------------------------------------------------
-
-IntType& IntType::add(IntType& i)
-{
-    return add(*i.value);
-}
-IntType& IntType::subtract(IntType& i)
-{
-    return subtract(*i.value);
-}
-IntType& IntType::multiply(IntType& i)
-{
-    return multiply(*i.value);
-}
-IntType& IntType::divide(IntType& i)
-{
-    return divide(*i.value);
-}
-
-
 
 #include <iostream>
 
@@ -538,7 +328,7 @@ int main()
     std::cout << "DoubleType add result=" << *dt.add(2.0).value << std::endl;
     std::cout << "DoubleType subtract result=" << *dt.subtract(2.0).value << std::endl;
     std::cout << "DoubleType multiply result=" << *dt.multiply(2.0).value << std::endl;
-    std::cout << "DoubleType divide result=" << *dt.divide(5.f).value << std::endl << std::endl;
+    // std::cout << "DoubleType divide result=" << *dt.divide(5.f).value << std::endl << std::endl;
 
     std::cout << "IntType add result=" << *it.add(2).value << std::endl;
     std::cout << "IntType subtract result=" << *it.subtract(2).value << std::endl;
@@ -558,7 +348,7 @@ int main()
     std::cout << "Initial value of it: " << *it.value << std::endl;
     // --------
     std::cout << "Use of function concatenation (mixed type arguments) " << std::endl;
-    std::cout << "New value of dt = (dt * it) / 5.0f + ft = " << *(dt.multiply(it).divide(5.0f).add(ft).value) << std::endl;
+    // std::cout << "New value of dt = (dt * it) / 5.0f + ft = " << *(dt.multiply(it)) dt.divide(5.0f) dt.add(ft).value) << std::endl;
 
     std::cout << "---------------------\n" << std::endl; 
     
