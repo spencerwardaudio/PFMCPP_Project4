@@ -148,8 +148,9 @@ struct IntType;
 
 struct FloatType 
 {
+private:
     float* value;
-
+public:
     FloatType(float fTValue) : value( new float (fTValue) ){}
     ~FloatType()
     {
@@ -161,10 +162,7 @@ struct FloatType
     FloatType& subtract(float rhs);
     FloatType& multiply(float rhs);
     FloatType& divide(float rhs);
-
-    private:
-
-
+    operator float() { return *value; }
 
 };
 
@@ -172,8 +170,9 @@ struct FloatType
 
 struct DoubleType 
 {
+private:
     double* value;
-
+public:
     DoubleType(double dtValue) : value( new double (dtValue) ){}
     ~DoubleType()
     {
@@ -185,16 +184,16 @@ struct DoubleType
     DoubleType& subtract(double rhs);
     DoubleType& multiply(double rhs);
     DoubleType& divide(double rhs);
-
+    operator double() { return *value; }
 };
 
 //------------------------------------------------
 
 struct IntType 
 {
-
+private:
     int* value;
-
+public:
     IntType(int itValue) : value( new int (itValue) ){}
     ~IntType()
     {
@@ -206,7 +205,7 @@ struct IntType
     IntType& subtract(int rhs);
     IntType& multiply(int rhs);
     IntType& divide(int rhs);
-
+    operator int() { return *value; }
 };
 
 //------------------------------------------------
@@ -320,20 +319,20 @@ int main()
     DoubleType dt ( 2 );
     IntType it ( 2 ) ;
 
-    std::cout << "FloatType add result=" << *ft.add( 2.0f ).value << std::endl;
-    std::cout << "FloatType subtract result=" << *ft.subtract( 2.0f ).value << std::endl;
-    std::cout << "FloatType multiply result=" << *ft.multiply( 2.0f ).value << std::endl;
-    std::cout << "FloatType divide result=" << *ft.divide( 16.0f).value << std::endl << std::endl;
+    std::cout << "FloatType add result=" << ft.add( 2.0f ) << std::endl;
+    std::cout << "FloatType subtract result=" << ft.subtract( 2.0f ) << std::endl;
+    std::cout << "FloatType multiply result=" << ft.multiply( 2.0f ) << std::endl;
+    std::cout << "FloatType divide result=" << ft.divide( 16.0f) << std::endl << std::endl;
 
-    std::cout << "DoubleType add result=" << *dt.add(2.0).value << std::endl;
-    std::cout << "DoubleType subtract result=" << *dt.subtract(2.0).value << std::endl;
-    std::cout << "DoubleType multiply result=" << *dt.multiply(2.0).value << std::endl;
+    std::cout << "DoubleType add result=" << dt.add(2.0) << std::endl;
+    std::cout << "DoubleType subtract result=" << dt.subtract(2.0) << std::endl;
+    std::cout << "DoubleType multiply result=" << dt.multiply(2.0) << std::endl;
     // std::cout << "DoubleType divide result=" << *dt.divide(5.f).value << std::endl << std::endl;
 
-    std::cout << "IntType add result=" << *it.add(2).value << std::endl;
-    std::cout << "IntType subtract result=" << *it.subtract(2).value << std::endl;
-    std::cout << "IntType multiply result=" << *it.multiply(2).value << std::endl;
-    std::cout << "IntType divide result=" << *it.divide(3).value << std::endl << std::endl;
+    std::cout << "IntType add result=" << it.add(2) << std::endl;
+    std::cout << "IntType subtract result=" << it.subtract(2) << std::endl;
+    std::cout << "IntType multiply result=" << it.multiply(2) << std::endl;
+    std::cout << "IntType divide result=" << it.divide(3) << std::endl << std::endl;
     std::cout << "Chain calculation = " << *(it.multiply(1000).divide(2).subtract(10).add(100)).value << std::endl;
 
         // FloatType object instanciation and method tests
