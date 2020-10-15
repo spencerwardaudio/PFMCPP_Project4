@@ -9,7 +9,7 @@ Project 4: Part 4 / 9
 
     Build/Run often with this task to make sure you're not breaking the code with each step.
     I recommend committing after you get each step working so you can revert to a working version easily if needed.
- 
+  
  1) add pow() functions, and a powInternal() function to each of your UDTs
      a) your pow() functions should call powInternal()
      b) add a pow() whose argument type is the primitive your UDT owns.  the argument should be passed by copy.
@@ -292,6 +292,8 @@ public:
         delete value;
         value = nullptr;
     }
+
+    
 
     FloatType& add(float rhs);
     FloatType& subtract(float rhs);
