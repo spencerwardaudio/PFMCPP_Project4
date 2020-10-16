@@ -181,6 +181,7 @@ struct HeapA
  */
 
 #include <iostream>
+#include <cmath>
 
 struct DoubleType;
 struct IntType; 
@@ -202,6 +203,7 @@ public:
 
     operator float() { return *value; }
 
+    FloatType& pow(float ft);
     FloatType& pow(const FloatType& ft);
     FloatType& pow(const DoubleType& dt);
     FloatType& pow(const IntType& it);
@@ -284,20 +286,33 @@ FloatType& FloatType::divide(float rhs)
     return  *this;
 }
 
-FloatType& FloatType::pow(const FloatType& ft)
+FloatType& FloatType::pow(float ft)
 {
     return powInternal( ft );
 }
 
+FloatType& FloatType::powInternal (float ft)
+{
+    *value = std::pow( *value, ft );
+    return *this;
+}
+
+FloatType& FloatType::pow(const FloatType& ft)
+{
+    return powInternal( static_cast<float>(ft) );
+}
+
 FloatType& FloatType::pow(const DoubleType& dt)
 {
-
+    return powInternal( static_cast<float>(dt) );
 }
 
 FloatType& FloatType::pow(const IntType& it)
 {
-
+    return powInternal( static_cast<float>(it) );
 }
+
+
 
 //------------------------------------------------
 
@@ -372,6 +387,17 @@ struct Point
         y *= m;
         return *this;
     }
+
+    Point& multiply(FloatType&);
+    Point& multiply(DoubleType&);
+    Point& multiply(IntType&);
+
+    void toString()
+    {
+        std::cout << x << " is x";
+        std::cout << y << " is y";
+    }
+
 private:
     float x{0}, y{0};
 };
@@ -534,6 +560,7 @@ int main()
     std::cout << "---------------------\n" << std::endl; 
 
     part3();
+    part4();
 
     std::cout << "good to go!\n";
 
