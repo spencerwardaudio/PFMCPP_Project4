@@ -452,7 +452,9 @@ IntType& IntType::pow(int it)
 
 IntType& IntType::powInternal(int it)
 {
-    *value = std::pow( *value, it );
+    if(this->value != nullptr)
+        *value = static_cast<int> (std::pow( static_cast<double>(*value), static_cast<double>(it)));
+
     return *this;
 }
 
@@ -473,7 +475,8 @@ IntType& IntType::pow(const IntType& it)
 
 //------------------------------------------------
 
-Point::Point(const float a, const float b);
+Point::Point(const float a, const float b) : x(static_cast<float>(a)), y(static_cast<float>(b))
+{}
 
 Point::Point(const FloatType& a, const FloatType& b) : x(static_cast<float>(a)), y(static_cast<float>(b)) {}
 
