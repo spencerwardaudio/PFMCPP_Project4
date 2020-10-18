@@ -398,17 +398,17 @@ DoubleType& DoubleType::powInternal(double dt)
 
 DoubleType& DoubleType::pow(const FloatType& ft)
 {
-    return powInternal( static_cast<float>(ft) );
+    return powInternal( static_cast<double>(ft) );
 }
 
 DoubleType& DoubleType::pow(const DoubleType& dt)
 {
-    return powInternal( static_cast<float>(dt) );
+    return powInternal( static_cast<double>(dt) );
 }
 
 DoubleType& DoubleType::pow(const IntType& it)
 {
-    return powInternal( static_cast<float>(it) );
+    return powInternal( static_cast<double>(it) );
 }
 
 //------------------------------------------------
