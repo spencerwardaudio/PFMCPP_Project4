@@ -27,29 +27,29 @@ Do not delete your previous main.
  5) delete the example below after it makes sense how your code will change due to 1).
  */
 
-namespace Example
-{
-    int main()
-    {
-        FloatType floatNum(4.3f);
-        IntType intNum(2);
-        IntType intNum2(6);
+// namespace Example
+// {
+//     int main()
+//     {
+//         FloatType floatNum(4.3f);
+//         IntType intNum(2);
+//         IntType intNum2(6);
 
-        /* 
-        if you previously had a line like this demonstrating chaining:
+//         /* 
+//         if you previously had a line like this demonstrating chaining:
             
-            intNum.add(3).add(4.5f).divide(floatNum); 
+//             intNum.add(3).add(4.5f).divide(floatNum); 
 
-        it should become:
-        */
-        intNum += 3;
-        intNum += 4.5f;
-        intNum /= floatNum;
-        std::cout << "intNum: " << intNum << std::endl;
+//         it should become:
+//         */
+//         intNum += 3;
+//         intNum += 4.5f;
+//         intNum /= floatNum;
+//         std::cout << "intNum: " << intNum << std::endl;
         
-        return 0;
-    }
-}
+//         return 0;
+//     }
+// }
 
  /*
  6) compile/link/run to make sure you don't have any errors or warnings.
@@ -211,10 +211,10 @@ public:
         value = nullptr;
     }
 
-    FloatType& add(float rhs);
-    FloatType& subtract(float rhs);
-    FloatType& multiply(float rhs);
-    FloatType& divide(float rhs);
+    FloatType& operator+=(float rhs);
+    FloatType& operator-=(float rhs);
+    FloatType& operator*=(float rhs);
+    FloatType& operator/=(float rhs);
 
     FloatType& pow(float ft);
     FloatType& pow(const FloatType& ft);
@@ -239,10 +239,10 @@ public:
         value = nullptr;
     }
 
-    DoubleType& add(double rhs);
-    DoubleType& subtract(double rhs);
-    DoubleType& multiply(double rhs);
-    DoubleType& divide(double rhs);
+    DoubleType& operator+=(double rhs);
+    DoubleType& operator-=(double rhs);
+    DoubleType& operator*=(double rhs);
+    DoubleType& operator/=(double rhs);
 
     DoubleType& pow(double dt);
     DoubleType& pow(const FloatType& ft);
@@ -266,10 +266,10 @@ public:
         value = nullptr;
     }
 
-    IntType& add(int rhs);
-    IntType& subtract(int rhs);
-    IntType& multiply(int rhs);
-    IntType& divide(int rhs);
+    IntType& operator+=(int rhs);
+    IntType& operator-=(int rhs);
+    IntType& operator*=(int rhs);
+    IntType& operator/=(int rhs);
 
     IntType& pow(int it);
     IntType& pow(const FloatType& ft);
@@ -306,25 +306,25 @@ private:
 };
 
 
-FloatType& FloatType::add(float rhs)
+FloatType& FloatType::operator+=(float rhs)
 {
     *value += rhs;
     return  *this;
 }
 
-FloatType& FloatType::subtract(float rhs)
+FloatType& FloatType::operator-=(float rhs)
 {
     *value -= rhs;
     return  *this;
 }
 
-FloatType& FloatType::multiply(float rhs)
+FloatType& FloatType::operator*=(float rhs)
 {
     *value *= rhs;
     return  *this;
 }
 
-FloatType& FloatType::divide(float rhs)
+FloatType& FloatType::operator/=(float rhs)
 {
     if (rhs == 0.f)
     { 
@@ -363,25 +363,25 @@ FloatType& FloatType::pow(const IntType& it)
 
 //------------------------------------------------
 
-DoubleType& DoubleType::add(double rhs)
+DoubleType& DoubleType::operator+=(double rhs)
 {
     *value += rhs;
     return  *this;
 }
 
-DoubleType& DoubleType::subtract(double rhs)
+DoubleType& DoubleType::operator-=(double rhs)
 {
     *value -= rhs;
     return  *this;
 }
 
-DoubleType& DoubleType::multiply(double rhs)
+DoubleType& DoubleType::operator*=(double rhs)
 {
     *value *= rhs;
     return  *this;
 }
 
-DoubleType& DoubleType::divide(double rhs)
+DoubleType& DoubleType::operator/=(double rhs)
 {
     if (rhs == 0.0)
     { 
@@ -420,25 +420,25 @@ DoubleType& DoubleType::pow(const IntType& it)
 
 //------------------------------------------------
 
-IntType& IntType::add(int rhs)
+IntType& IntType::operator+=(int rhs)
 {
     *value += rhs;
     return  *this;
 }
 
-IntType& IntType::subtract(int rhs)
+IntType& IntType::operator-=(int rhs)
 {
     *value -= rhs;
     return  *this;
 }
 
-IntType& IntType::multiply(int rhs)
+IntType& IntType::operator*=(int rhs)
 {
     *value *= rhs;
     return  *this;
 }
 
-IntType& IntType::divide(int rhs)
+IntType& IntType::operator/=(int rhs)
 {
     if (rhs == 0)
     {
@@ -630,7 +630,7 @@ int main()
     std::cout << "FloatType multiply result=" << ft.multiply( 2.0f ) << std::endl;
     std::cout << "FloatType divide result=" << ft.divide( 16.0f) << std::endl << std::endl;
 
-    std::cout << "DoubleType add result=" << dt.add(2.0) << std::endl;
+    std::cout << "DoubleType add result=" << dt+=(2.0) << std::endl;
     std::cout << "DoubleType subtract result=" << dt.subtract(2.0) << std::endl;
     std::cout << "DoubleType multiply result=" << dt.multiply(2.0) << std::endl;
     std::cout << "DoubleType divide result=" << dt.divide(static_cast<double>(5.f)) << std::endl << std::endl;
