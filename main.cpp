@@ -270,7 +270,6 @@ public:
 
 struct Point
 {
-    Point(const float a, const float b);
     Point(const FloatType& a, const FloatType& b);
     Point(const DoubleType& a, const DoubleType& b);
     Point(const IntType& a, const IntType& b);
@@ -284,11 +283,9 @@ struct Point
         return *this;
     }
 
-    Point& multiply(const FloatType& ft);
-
-    Point& multiply(const DoubleType& dt);
-
-    Point& multiply(const IntType& it);
+    Point& multiply(const FloatType& input);
+    Point& multiply(const DoubleType& input);
+    Point& multiply(const IntType& input);
 
     void toString();
 
@@ -475,34 +472,30 @@ IntType& IntType::pow(const IntType& it)
 
 //------------------------------------------------
 
-Point::Point(const float a, const float b) : x(static_cast<float>(a)), y(static_cast<float>(b))
-{}
-
 Point::Point(const FloatType& a, const FloatType& b) : x(static_cast<float>(a)), y(static_cast<float>(b)) {}
 
 Point::Point(const DoubleType& a, const DoubleType& b) : x(static_cast<float>(a)), y(static_cast<float>(b)) {}
 
-Point::Point(const IntType& a, const IntType& b) : x(static_cast<float>(a), y(static_cast<float>(b)) {}
+Point::Point(const IntType& a, const IntType& b) : x(static_cast<float>(a)), y(static_cast<float>(b)) {}
 
-Point& Point::multiply(const FloatType& ft)
+Point& Point::multiply(const FloatType& input)
 {
-    return multiply(static_cast<float>(ft));
+    return multiply(static_cast<float>(input));
 }
 
-Point& Point::multiply(const DoubleType& dt)
+Point& Point::multiply(const DoubleType& input)
 {
-    return multiply(static_cast<float>(dt));
+    return multiply(static_cast<float>(input));
 }
 
-Point& Point::multiply(const IntType& it)
+Point& Point::multiply(const IntType& input)
 {
-    return multiply(static_cast<float>(it));
+    return multiply(static_cast<float>(input));
 }
 
 void Point::toString()
 {
-    std::cout << x << " is x";
-    std::cout << y << " is y";
+    std::cout << "Point { x: " << x << ", y: " << y << " } " << std::endl;
 }
 
 //------------------------------------------------
