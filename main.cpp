@@ -349,8 +349,6 @@ FloatType& FloatType::pow(const IntType& it)
     return powInternal( static_cast<float>(it) );
 }
 
-
-
 //------------------------------------------------
 
 DoubleType& DoubleType::add(double rhs)
