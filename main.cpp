@@ -598,6 +598,23 @@ void Point::toString()
 
 //------------------------------------------------
 
+void myFloatFreeFunct(float& value)
+{
+    value += 7.0f;
+}
+
+void myDoubleFreeFunct(double& value)
+{
+    value += 6.0;
+}
+
+void myIntFreeFunct(int& value)
+{
+    value += 5;
+}
+
+//------------------------------------------------
+
 void part3()
 {
     FloatType ft( 5.5f );
