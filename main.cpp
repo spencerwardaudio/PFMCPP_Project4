@@ -225,7 +225,7 @@ public:
 //  3) the other apply() function should take a function pointer. 
 //     the function pointer should return void.
 
-    FloatType& apply(void(*funcPtr));
+    FloatType& apply(void(*func)(float&));
 };
 
 //------------------------------------------------
@@ -255,7 +255,7 @@ public:
     operator double() const { return *value; }
 
     DoubleType& apply(std::function<DoubleType&(double&)> func);
-    DoubleType& apply(void(*funcPtr));
+    DoubleType& apply(void(*func)(double&));
 };
 
 //------------------------------------------------
@@ -285,7 +285,7 @@ public:
     operator int() const { return *value; }
 
     IntType& apply(std::function<IntType&(int&)> func);
-    IntType& apply(void(*funcPtr));
+    IntType& apply(void(*func)(int&));
 };
 
 //------------------------------------------------
@@ -389,6 +389,26 @@ FloatType& FloatType::pow(const IntType& it)
     return powInternal( static_cast<float>(it) );
 }
 
+FloatType& FloatType::apply(std::function<FloatType&(float&)> func)
+{
+    if(func)
+    {
+        return func(*value);
+    }
+
+    return *this;
+}
+
+FloatType& FloatType::apply(void(*func)(float&))
+{
+    if(func)
+    {
+        return func(*value);
+    }
+
+    return *this;
+}
+
 //------------------------------------------------
 
 DoubleType& DoubleType::operator+=(double rhs)
@@ -444,6 +464,26 @@ DoubleType& DoubleType::pow(const DoubleType& dt)
 DoubleType& DoubleType::pow(const IntType& it)
 {
     return powInternal( static_cast<double>(it) );
+}
+
+DoubleType& DoubleType::apply(std::function<DoubleType&(double&)> func)
+{
+    if(func)
+    {
+        return func(*value);
+    }
+
+    return *this;
+}
+    
+DoubleType& DoubleType::apply(void(*func)(double&))
+{
+    if(func)
+    {
+        return func(*value);
+    }
+
+    return *this;
 }
 
 //------------------------------------------------
@@ -506,6 +546,26 @@ IntType& IntType::pow(const DoubleType& dt)
 IntType& IntType::pow(const IntType& it)
 {
     return powInternal( static_cast<int>(it) );
+}
+
+IntType& IntType::apply(std::function<IntType&(int&)> func)
+{
+    if(func)
+    {
+        return func(*value);
+    }
+
+    return *this;
+}
+
+IntType& IntType::apply(void(*funcPtr)(int&))
+{
+    if(func)
+    {
+        return func(*value);
+    }
+
+    return *this;
 }
 
 //------------------------------------------------
