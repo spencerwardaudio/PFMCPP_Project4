@@ -214,18 +214,10 @@ public:
     FloatType& pow(const FloatType& ft);
     FloatType& pow(const DoubleType& dt);
     FloatType& pow(const IntType& it);
-
     operator float() const { return *value; }
 
-    //  2) One of the apply() functions should takes a std::function<> object as the function argument.
-    // the std::function<> object should return *this;
-
-    FloatType& apply(std::function<FloatType&(float&)> func);
- 
-//  3) the other apply() function should take a function pointer. 
-//     the function pointer should return void.
-
-    FloatType& apply(void(*func)(float&));
+    FloatType& apply(std::function<FloatType&(float&)> f);
+    FloatType& apply(void(*f)(float&));
 };
 
 //------------------------------------------------
@@ -254,8 +246,8 @@ public:
     DoubleType& pow(const IntType& it);
     operator double() const { return *value; }
 
-    DoubleType& apply(std::function<DoubleType&(double&)> func);
-    DoubleType& apply(void(*func)(double&));
+    DoubleType& apply(std::function<DoubleType&(double&)> f);
+    DoubleType& apply(void(*f)(double&));
 };
 
 //------------------------------------------------
@@ -284,8 +276,8 @@ public:
     IntType& pow(const IntType& it);
     operator int() const { return *value; }
 
-    IntType& apply(std::function<IntType&(int&)> func);
-    IntType& apply(void(*func)(int&));
+    IntType& apply(std::function<IntType&(int&)> f);
+    IntType& apply(void(*f)(int&));
 };
 
 //------------------------------------------------
@@ -389,21 +381,21 @@ FloatType& FloatType::pow(const IntType& it)
     return powInternal( static_cast<float>(it) );
 }
 
-FloatType& FloatType::apply(std::function<FloatType&(float&)> func)
+FloatType& FloatType::apply(std::function<FloatType&(float&)> f)
 {
-    if(func)
+    if(f)
     {
-        return func(*value);
+        return f(*value);
     }
 
     return *this;
 }
 
-FloatType& FloatType::apply(void(*func)(float&))
+FloatType& FloatType::apply(void(*f)(float&))
 {
-    if(func)
+    if(f)
     {
-        return func(*value);
+        f(*value);
     }
 
     return *this;
@@ -480,7 +472,7 @@ DoubleType& DoubleType::apply(void(*func)(double&))
 {
     if(func)
     {
-        return func(*value);
+        func(*value);
     }
 
     return *this;
@@ -548,21 +540,21 @@ IntType& IntType::pow(const IntType& it)
     return powInternal( static_cast<int>(it) );
 }
 
-IntType& IntType::apply(std::function<IntType&(int&)> func)
+IntType& IntType::apply(std::function<IntType&(int&)> f)
 {
-    if(func)
+    if(f)
     {
-        return func(*value);
+        return f(*value);
     }
 
     return *this;
 }
 
-IntType& IntType::apply(void(*funcPtr)(int&))
+IntType& IntType::apply(void(*f)(int&))
 {
-    if(func)
+    if(f)
     {
-        return func(*value);
+        f(*value);
     }
 
     return *this;
@@ -753,7 +745,12 @@ void part6()
     
     std::cout << "Calling FloatType::apply() using a lambda (adds 7.0f) and FloatType as return type:" << std::endl;
     std::cout << "ft3 before: " << ft3 << std::endl;
-    ft3.apply( [](){} );
+    ft3.apply( [&](float& f) -> FloatType&
+    {
+        f += 7.0f;
+        return ft3;
+    });
+
     std::cout << "ft3 after: " << ft3 << std::endl;
     std::cout << "Calling FloatType::apply() using a free function (adds 7.0f) and void as return type:" << std::endl;
     std::cout << "ft3 before: " << ft3 << std::endl;
@@ -763,7 +760,12 @@ void part6()
 
     std::cout << "Calling DoubleType::apply() using a lambda (adds 6.0) and DoubleType as return type:" << std::endl;
     std::cout << "dt3 before: " << dt3 << std::endl;
-    dt3.apply( [](){} );
+    dt3.apply( [&](double& f) -> DoubleType&
+    {
+        f += 6.0;
+        return dt3;
+    } );
+
     std::cout << "dt3 after: " << dt3 << std::endl;
     std::cout << "Calling DoubleType::apply() using a free function (adds 6.0) and void as return type:" << std::endl;
     std::cout << "dt3 before: " << dt3 << std::endl;
@@ -773,7 +775,12 @@ void part6()
 
     std::cout << "Calling IntType::apply() using a lambda (adds 5) and IntType as return type:" << std::endl;
     std::cout << "it3 before: " << it3 << std::endl;
-    it3.apply( [](){} );
+    it3.apply( [&](int& f) -> IntType&
+    {
+        f += 5;
+        return it3;
+    } );
+
     std::cout << "it3 after: " << it3 << std::endl;
     std::cout << "Calling IntType::apply() using a free function (adds 5) and void as return type:" << std::endl;
     std::cout << "it3 before: " << it3 << std::endl;
