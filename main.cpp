@@ -272,6 +272,7 @@ Use a service like https://www.diffchecker.com/diff to compare your output.
 
 #include <iostream>
 #include <cmath>
+#include <memory>
 #include <functional>
 
 struct DoubleType;
@@ -280,10 +281,10 @@ struct IntType;
 struct FloatType    
 {
 private:
-    float* value = nullptr;
+    std::unique_ptr<float> value = nullptr;
     FloatType& powInternal(const float ft);
 public:
-    FloatType(float fTValue) : value( new float (fTValue) ){}
+    FloatType(float fTValue) : value( std::make_unique_ptr<float> (fTValue) ){}
     ~FloatType()
     {
         delete value;
@@ -301,8 +302,8 @@ public:
     FloatType& pow(const IntType& it);
     operator float() const { return *value; }
 
-    FloatType& apply(std::function<FloatType&(float&)> f);
-    FloatType& apply(void(*f)(float&));
+    FloatType& apply(std::function<FloatType&(std::unique_ptr<float>&)> f);
+    FloatType& apply(void(*f)(std::unique_ptr<float>&));
 };
 
 //------------------------------------------------
@@ -310,10 +311,10 @@ public:
 struct DoubleType 
 {
 private:
-    double* value = nullptr;
+    std::unique_ptr<double> value = nullptr;
     DoubleType& powInternal(double dt);
 public:
-    DoubleType(double dtValue) : value( new double (dtValue) ){}
+    DoubleType(double dtValue) : value( std::make_unique_ptr<double> (dtValue) ){}
     ~DoubleType()
     {
         delete value;
@@ -331,8 +332,8 @@ public:
     DoubleType& pow(const IntType& it);
     operator double() const { return *value; }
 
-    DoubleType& apply(std::function<DoubleType&(double&)> f);
-    DoubleType& apply(void(*f)(double&));
+    DoubleType& apply(std::function<DoubleType&(std::unique_ptr<double>&)> f);
+    DoubleType& apply(void(*f)(std::unique_ptr<double>&&));
 };
 
 //------------------------------------------------
@@ -340,10 +341,10 @@ public:
 struct IntType 
 {
 private:
-    int* value = nullptr;
+    std::unique_ptr<int> value = nullptr;
     IntType& powInternal(int it);
 public:
-    IntType(int itValue) : value( new int (itValue) ){}
+    IntType(int itValue) : value( std::make_unique_ptr<int> (itValue) ){}
     ~IntType()
     {
         delete value;
@@ -361,8 +362,8 @@ public:
     IntType& pow(const IntType& it);
     operator int() const { return *value; }
 
-    IntType& apply(std::function<IntType&(int&)> f);
-    IntType& apply(void(*f)(int&));
+    IntType& apply(std::function<IntType&(std::unique_ptr<int>&)> f);
+    IntType& apply(void(*f)(std::unique_ptr<int>&&));
 };
 
 //------------------------------------------------
@@ -466,7 +467,7 @@ FloatType& FloatType::pow(const IntType& it)
     return powInternal( static_cast<float>(it) );
 }
 
-FloatType& FloatType::apply(std::function<FloatType&(float&)> f)
+FloatType& FloatType::apply(std::function<FloatType&(std::unique_ptr<float>&)> f)
 {
     if(f)
     {
@@ -476,7 +477,7 @@ FloatType& FloatType::apply(std::function<FloatType&(float&)> f)
     return *this;
 }
 
-FloatType& FloatType::apply(void(*f)(float&))
+FloatType& FloatType::apply(void(*f)(std::unique_ptr<float>&))
 {
     if(f)
     {
@@ -543,7 +544,7 @@ DoubleType& DoubleType::pow(const IntType& it)
     return powInternal( static_cast<double>(it) );
 }
 
-DoubleType& DoubleType::apply(std::function<DoubleType&(double&)> func)
+DoubleType& DoubleType::apply(std::function<DoubleType&(std::unique_ptr<double>&)> func)
 {
     if(func)
     {
@@ -553,7 +554,7 @@ DoubleType& DoubleType::apply(std::function<DoubleType&(double&)> func)
     return *this;
 }
     
-DoubleType& DoubleType::apply(void(*func)(double&))
+DoubleType& DoubleType::apply(void(*f)(std::unique_ptr<double>&&))
 {
     if(func)
     {
@@ -625,7 +626,7 @@ IntType& IntType::pow(const IntType& it)
     return powInternal( static_cast<int>(it) );
 }
 
-IntType& IntType::apply(std::function<IntType&(int&)> f)
+IntType& IntType::apply(std::function<IntType&(std::unique_ptr<int>&)> f)
 {
     if(f)
     {
@@ -635,7 +636,7 @@ IntType& IntType::apply(std::function<IntType&(int&)> f)
     return *this;
 }
 
-IntType& IntType::apply(void(*f)(int&))
+IntType& IntType::apply(void(*f)(std::unique_ptr<int>&&))
 {
     if(f)
     {
