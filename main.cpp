@@ -362,9 +362,9 @@ public:
     }
 
     template<typename Callable>
-    Numeric& apply(Callable callable)
+    Numeric& apply(Callable&& f)
     {
-        callable(value);
+        f(value);
         return *this;
     }
 
@@ -638,9 +638,9 @@ void part7()
 
     {
         using NumericType = decltype(ft3);
-        ft3.apply( [&ft3](std::unique_ptr<Type>) -> NumericType&
+        ft3.apply( [&ft3](std::unique_ptr<NumericType>& f) -> NumericType&
         {
-           *value += 7.0f;
+           *f += 7.0f;
            return ft3;
         } );
     }
@@ -657,7 +657,11 @@ void part7()
 
     {
         using Type = decltype(double);
-        dt3.apply( [&dt3](std::unique...){} ); // This calls the templated apply fcn
+        dt3.apply( [&dt3](std::unique_ptr<double>& d) -> NumericType&
+        {
+            d += 6.0;
+            return dt3;
+        }); // This calls the templated apply fcn
     }
     
     std::cout << "dt3 after: " << dt3 << std::endl;
@@ -672,7 +676,11 @@ void part7()
 
     {
         using Type = decltype(int);
-        it3.apply( [&it3](std::unique...){} );
+        it3.apply( [&it3](std::unique_ptr<int>& i)
+        {
+            i += 5;
+            return it3;
+        });
     }
     std::cout << "it3 after: " << it3 << std::endl;
     std::cout << "Calling Numeric<int>::apply() twice using a free function (adds 7) and void as return type:" << std::endl;
