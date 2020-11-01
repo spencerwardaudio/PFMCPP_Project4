@@ -261,11 +261,29 @@ public:
         return *this;
     }
 
-    Numeric& operator/=(Type rhs)
+    template <typename DivType>
+    Numeric& operator/=(const DivType& rhs)
     {
-        if (rhs == 0.f)
+        if constexpr( std::is_same<Type, int>::value)
+        {
+            if constexpr( std::is_same<DivType, int>::value)
+            {
+                if(rhs == 0)
+                {
+                    std::cout << "warning integer division by 0, don't do the division" << std::endl;
+                    return *this;
+                }
+            }
+            //template type is less than 1 and not an int
+            else if( rhs < std::numeric_limits<DivType>::epsilon)
+            {
+                std::cout << "warning division does not return a integer, don't do the division" << std::endl;
+                return *this; 
+            }
+        }
+        else if ( rhs < std::numeric_limits<DivType>::epsilon)
         { 
-            std::cout << "warning: floating point division by zero!" << std::endl; 
+            std::cout << "warning: floating point division by zero!" << std::endl;
         }
 
         *value /= rhs;
@@ -341,11 +359,10 @@ public:
 
     Numeric& operator/=(Type rhs)
     {
-        if (rhs == 0.f)
+        if (fabs(rhs - 0.0) < std::numeric_limits<Type>::epsilon())
         { 
             std::cout << "warning: floating point division by zero!" << std::endl; 
         }
-
         *value /= rhs;
         return *this;
     }
