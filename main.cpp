@@ -231,11 +231,6 @@ struct Numeric
 
     Numeric(Type v) : value( std::make_unique<Type>(v) ){}
 
-    ~Numeric()
-    {
-        value = nullptr;
-    }
-
     operator Type() const { return *value; }
 
     Numeric& operator+=(Type rhs)
@@ -324,11 +319,6 @@ struct Numeric<double>
 
     Numeric(Type v) : value( std::make_unique<Type>(v) ){}
 
-    ~Numeric()
-    {
-        value = nullptr;
-    }
-
     Numeric& operator+=(Type rhs)
     {
         *value += rhs;
@@ -382,12 +372,10 @@ private:
 };
 
 //-----------------------------------------------
-template<typename TypeID1, typename TypeID2>
 struct Point
 {
+    template<typename TypeID1, typename TypeID2>
     Point(const TypeID1& a, const TypeID2& b) : x(static_cast<float>(a)), y(static_cast<float>(b)) {}
-
-    ~Point() {}
 
     Point& multiply(float m)
     {
