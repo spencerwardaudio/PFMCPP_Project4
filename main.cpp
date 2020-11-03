@@ -219,21 +219,10 @@ struct Numeric
         return powInternal( ft );
     }
 
-    Numeric& apply(std::function<Numeric&(std::unique_ptr<Type>&)> f)
+    template<typename Callable>
+    Numeric& apply(Callable&& f)
     {
-        if(f)
-        {
-            return f(value);
-        }
-        return *this;
-    }
-
-    Numeric& apply(void(*f)(std::unique_ptr<Type>&))
-    {
-        if(f)
-        {
-            f(value);
-        }
+        f(value);
         return *this;
     }
 
@@ -248,64 +237,13 @@ private:
     }
 };
 
-// template<>
-// struct Numeric<double>
-// {
-//     using Type = double;
-
-//     Numeric(Type v) : value( std::make_unique<Type>(v) ){}
-
-//     Numeric& operator+=(Type rhs)
-//     {
-//         *value += rhs;
-//         return *this;
-//     }
-
-//     Numeric& operator-=(Type rhs)
-//     {
-//         *value -= rhs;
-//         return *this;
-//     }
-
-//     Numeric& operator*=(Type rhs)
-//     {
-//         *value *= rhs;
-//         return *this;
-//     }
-
-//     Numeric& operator/=(Type rhs)
-//     {
-//         if (fabs(rhs - 0.0) < std::numeric_limits<Type>::epsilon())
-//         { 
-//             std::cout << "warning: floating point division by zero!" << std::endl;
-//         }
-//         *value /= rhs;
-//         return *this;
-//     }
-
-//     Numeric& pow(Type ft)
-//     {
-//         return powInternal( ft );
-//     }
-
-//     Numeric& powInternal(const Numeric& ft)
-//     {
-//         *value = std::pow( *value, ft );
-//         return *this;
-//     }
-
-//     template<typename Callable>
-//     Numeric& apply(Callable&& f)
-//     {
-//         f(value);
-//         return *this;
-//     }
-
-//     operator Type() const { return *value; }
-
-// private:
-//     std::unique_ptr<Type> value = nullptr;
-// };
+//double check this
+template<typename Type>
+void cube( std::unique_ptr<Type>& value )
+{
+    auto& v = *value;
+    v = v * v * v;
+}
 
 //-----------------------------------------------
 struct Point
