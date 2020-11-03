@@ -25,6 +25,9 @@ Create a branch named Part8
 
 #include <typeinfo>
 #include <iostream>
+#include <cmath>
+#include <memory>
+#include <functional>
 
 template<typename NumericType>
 struct Temporary
@@ -40,13 +43,14 @@ struct Temporary
      */
     operator NumericType() const { /* read-only function */ return v; }
     operator NumericType&() { /* read/write function */ return v; }
+
 private:
     static int counter;
     NumericType v;
 };
 
 template<typename NumericType>
-    int Temporary<NumericType>::counter { 0 };
+int Temporary<NumericType>::counter { 0 };
 
 /*
  2) add the definition of Temporary::counter here, which is a static variable and must be defined outside of the class.
@@ -145,15 +149,10 @@ Use a service like https://www.diffchecker.com/diff to compare your output.
  Wait for my code review.
  */
 
-#include <iostream>
-#include <cmath>
-#include <memory>
-#include <functional>
-
 template <typename NumericType>
 struct Numeric    
 {
-    using Type = NumericType;
+    using Type = Temporary<NumericType>;
 
     Numeric(Type v) : value( std::make_unique<Type>(v) ){}
 
@@ -213,14 +212,14 @@ struct Numeric
         { 
             std::cout << "warning: floating point division by zero!" << std::endl;
         }
-        *value /= otherType;
+        *value /= static_cast<NumericType>(otherType);
         return *this;
     }
 
     template<typename OtherType>
-    Numeric& pow(const OtherType oth)
+    Numeric& pow(const OtherType& o)
     {
-        *value = static_cast<Type>( std::pow(*value, static_cast<NumericType>(oth)) );
+        *value = static_cast<Type>( std::pow(*value, static_cast<NumericType>(o)) );
         return *this;
     }
 
@@ -232,19 +231,9 @@ struct Numeric
     }
 
 private:
-
     std::unique_ptr<Type> value = nullptr;
 };
 
-//double check this
-template<typename Type>
-void cube( std::unique_ptr<Type>& value )
-{
-    auto& v = *value;
-    v = v * v * v;
-}
-
-//-----------------------------------------------
 struct Point
 {
     template<typename TypeID1, typename TypeID2>
@@ -293,6 +282,13 @@ template<typename Type>
 void myNumericFreeFunct(std::unique_ptr<Type>& value)
 {
     *value += 7;
+}
+
+template<typename Type>
+void cube( std::unique_ptr<Type>& value )
+{
+    auto& v = *value;
+    v = v * v * v;
 }
 
 //------------------------------------------------
@@ -379,43 +375,3 @@ int main()
     }
 }
 
-/*
-your program should generate the following output EXACTLY.
-This includes the warnings.
-Use a service like https://www.diffchecker.com/diff to compare your output. 
-you should have no errors or warnings.
-
-
-clang++ -std=c++17 -Weverything -Wno-c++98-compat -Wno-missing-prototypes main.cpp && ./a.out
-result of ft.add(): 555.556
-result of ft.subtract(): -308.644
-result of ft.multiply(): 53345.3
-result of ft.divide(): 0.285712
-result of ft.add(): 4444.56
-result of ft.subtract(): 4444.56
-result of ft.multiply(): 0
-result of ft.divide(): 
-warning, floating point division by zero returns 'inf' !
-inf
-result of db.add(): 555.556
-result of db.subtract(): -308.644
-result of db.multiply(): 53345.3
-result of db.divide(): 0.285712
-result of db.add(): 123.456
-result of db.subtract(): 123.456
-result of db.multiply(): 0
-result of db.divide(): 
-warning, floating point division by zero returns 'inf' !
-inf
-result of i.add(): 30
-result of i.subtract(): -10
-result of i.multiply(): 200
-result of i.divide(): 0
-result of i.add(): 10
-result of i.subtract(): 10
-result of i.multiply(): 0
-result of i.divide(): error, integer division by zero will crash the program!
-returning lhs
-10
-good to go!
-*/
