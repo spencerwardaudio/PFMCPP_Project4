@@ -159,6 +159,9 @@ struct Numeric
 
     operator Type() const { return *value; }
 
+    operator NumericType() const { /* read-only function */ return *value; }
+    operator NumericType&() { /* read/write function */ return *value; }
+
     template<typename OtherType>
     Numeric& operator=(const OtherType& o)
     {
@@ -187,7 +190,7 @@ struct Numeric
         return *this;
     }
 
-    template <typename OtherType>
+    template<typename OtherType>
     Numeric& operator/=(const OtherType& otherType)
     {
         if constexpr( std::is_same<Type, int>::value )
@@ -214,9 +217,11 @@ struct Numeric
         return *this;
     }
 
-    Numeric& pow(Type ft)
+    template<typename OtherType>
+    Numeric& pow(const OtherType oth)
     {
-        return powInternal( ft );
+        *value = static_cast<Type>( std::pow(*value, static_cast<NumericType>(oth)) );
+        return *this;
     }
 
     template<typename Callable>
@@ -229,12 +234,6 @@ struct Numeric
 private:
 
     std::unique_ptr<Type> value = nullptr;
-
-    Numeric& powInternal(const Type ft)
-    {
-        *value = static_cast<Type>( std::pow(*value, ft) );
-        return *this;
-    }
 };
 
 //double check this
