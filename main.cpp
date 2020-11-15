@@ -85,6 +85,17 @@ struct Temporary
         std::cout << "I'm a Temporary<" << typeid(v).name() << "> object, #"
                   << counter++ << std::endl;
     }
+
+    ~Temporary() = default;
+
+    Temporary(Temporary&& other) : v( std::move(other.v) ) {}
+
+    Temporary& operator=(Temporary&& other)
+    {
+        v = std::move(other.v);
+        return *this;
+    }
+
     operator NumericType() const { /* read-only function */ return v; }
     operator NumericType&() { /* read/write function */ return v; }
 
@@ -117,7 +128,20 @@ struct Numeric
 {
     using Type = Temporary<NumericType>;
 
-    Numeric(Type v) : value( std::make_unique<Type>(v) ){}
+    Numeric(NumericType v) : value( std::make_unique<Type>(v) ){}
+
+    ~Numeric() = default;
+
+    Numeric(Numeric&& other)
+    {
+        value = std::move(other.v);
+    }
+
+    Numeric& operator=(Numeric&& other)
+    {
+        value = std::move(other.v);
+        return *this;
+    }
 
     operator Type() const { return *value; }
 
